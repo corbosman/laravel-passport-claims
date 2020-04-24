@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![StyleCI][ico-styleci]][link-styleci]
 
 This package allows you to add claims to Laravel Passport JWT Tokens. This is currently just a proof-of-concept. If you have questions or comments, please open an issue. 
 
