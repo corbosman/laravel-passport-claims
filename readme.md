@@ -74,7 +74,7 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
+- [Cor Bosman][link-author]
 
 ## License
 
