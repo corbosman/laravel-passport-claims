@@ -3,7 +3,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This package allows you to add claims to Laravel Passport JWT Tokens. This is currently just a proof-of-concept. If you have questions or comments, please open an issue. 
+This package allows you to add claims to Laravel Passport JWT Tokens. If you have questions or comments, please open an issue. 
 
 ## Installation
 
@@ -13,7 +13,7 @@ Via Composer
 $ composer require corbosman/laravel-passport-claims
 ```
 
-To collect all the claims, this package sends the access token through a pipeline of classes. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. Because the token is send through the pipeline, you have access to methods on the AccessToken class. This is useful if you want to derive information from the token. For instance, look up user data based on the token user identifier.  
+To collect all the claims, this package sends the access token through a pipeline of classes. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. Because the AccessToken is send through the pipeline, you have access to methods on the AccessToken class. This is useful if you want to derive information from the token. For instance, look up user data based on the token user identifier.  
 
 ```php
 <?php
