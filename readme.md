@@ -13,7 +13,7 @@ Via Composer
 $ composer require corbosman/laravel-passport-claims
 ```
 
-To collect all the claims, this package sends the access token through a pipeline of classes. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. Because the AccessToken is sent through the pipeline, you have access to methods on the AccessToken class. This is useful if you want to derive information from the token. For instance, look up user data based on the token user identifier.  
+To collect all the claims, this package sends the AccessToken class through a pipeline of classes, similar to how laravel middleware works. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. You can of course add multiple claims in a single class as well. 
 
 ```php
 <?php
@@ -25,6 +25,28 @@ class CustomClaim
     public function handle($token, $next)
     {
         $token->addClaim('my-claim', 'my custom claim data');
+
+        return $next($token);
+    }
+}
+```
+
+Because the Passport AccessToken is sent through the pipeline, you have access to methods on the AccessToken class. This is useful if you want to derive information from the token. For instance, look up user data based on the token user identifier. You can check the AccessToken class to see all the methods you can use. 
+
+```php
+<?php
+
+namespace App\Claims;
+
+use App\User;
+
+class CustomClaim
+{
+    public function handle($token, $next)
+    {
+        $user = User::find($token->getUserIdentifier());
+
+        $token->addClaim('email', $user-email);
 
         return $next($token);
     }
