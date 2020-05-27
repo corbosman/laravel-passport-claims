@@ -2,17 +2,19 @@
 
 namespace CorBosman\Passport;
 
-use Illuminate\Pipeline\Pipeline;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Illuminate\Pipeline\Pipeline;
 use League\OAuth2\Server\CryptKey;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+use CorBosman\Passport\Traits\ClaimTrait;
 use Laravel\Passport\Bridge\AccessToken as PassportAccessToken;
 
 class AccessToken extends PassportAccessToken
 {
+    use ClaimTrait;
+
     private $privateKey;
-    private $claims = [];
 
     /**
      * Generate a string representation from the access token
@@ -59,26 +61,4 @@ class AccessToken extends PassportAccessToken
 
         return $jwt->getToken(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()));
     }
-
-    /**
-     * add a claim for this token
-     *
-     * @param $key
-     * @param $value
-     */
-    public function addClaim($key, $value)
-    {
-        $this->claims[$key] = $value;
-    }
-
-    /**
-     * return all claims
-     *
-     * @return array
-     */
-    public function claims()
-    {
-        return $this->claims;
-    }
-
 }
