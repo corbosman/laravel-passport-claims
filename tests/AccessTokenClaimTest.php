@@ -32,7 +32,7 @@ class AccessTokenClaimTest extends TestCase
         $userIdentifier = 1;
         $keys = (new RSA())->createKey(1024);
 
-        /* set a custom claim class */
+        /* set custom claims, defined below this test */
         app('config')->set('passport-claims.claims', [MyClaim::class, AnotherClaim::class]);
 
         /* create the laravel token */
@@ -46,8 +46,6 @@ class AccessTokenClaimTest extends TestCase
         /* assert our claims were set on the token */
         $this->assertEquals('test', $jwt->getClaim('my-claim'));
         $this->assertEquals('test', $jwt->getClaim('another-claim'));
-
-        $this->assertInstanceOf(AccessToken::class, $token);
     }
 }
 
