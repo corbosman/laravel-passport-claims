@@ -2,7 +2,7 @@
 
 namespace CorBosman\Passport;
 
-use CorBosman\Passport\AccessTokenRepository;
+use CorBosman\Passport\Console\ClaimGenerator;
 use Laravel\Passport\Bridge\AccessTokenRepository as PassportAccessTokenRepository;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -27,5 +27,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/passport-claims.php' => config_path('passport-claims.php'),
         ]);
+
+        $this->commands([ClaimGenerator::class]);
     }
 }

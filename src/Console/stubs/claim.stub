@@ -1,0 +1,14 @@
+<?php
+
+namespace {{ namespace }};
+
+use CorBosman\Passport\AccessToken;
+
+class {{ class }}
+{
+    public function handle(AccessToken $token, $next)
+    {
+        //  $token->addClaim('my-claim', 'my custom claim data');
+        return $next($token);
+    }
+}
