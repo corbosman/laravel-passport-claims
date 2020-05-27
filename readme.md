@@ -13,7 +13,13 @@ Via Composer
 $ composer require corbosman/laravel-passport-claims
 ```
 
-To collect all the claims, this package sends the AccessToken class through a pipeline of classes, similar to how laravel middleware works. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. You can of course add multiple claims in a single class as well. 
+This package sends the AccessToken class through a pipeline of classes to collect all the claims, similar to how laravel middleware works. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. You can of course add multiple claims in a single class as well. 
+
+You can use an artisan command to generate a class for you. Just provide a path from the root of your app folder. The example below will create a class app/Claims/CustomClaim.php
+
+```bash
+$ php artisan claim:generate Claims/CustomClaim
+```
 
 ```php
 <?php
@@ -52,6 +58,7 @@ class CustomClaim
     }
 }
 ```
+
 
 To tell this package which claims you want to add, you need to publish the config file and add a list of all your classes. To publish the config file, run the following command after installing this package. 
 
