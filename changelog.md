@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 1.2.0
+### Changed
+
+- Added tests
+- Added some more documentation in the readme
+
 ## version 1.1.0
 ### Changed
 
