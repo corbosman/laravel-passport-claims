@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.4.0
+## Changed
+
+- Added github workflow CI for commits and PRs
+
 ## Version 1.3.0
 ### Changed
 
