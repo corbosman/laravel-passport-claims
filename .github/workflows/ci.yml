@@ -13,14 +13,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Cache Composer
       uses: actions/cache@v2
-      env:
-        cache-name: cache-composer
       with:
         path: ~/.composer/cache
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-composer-
           ${{ runner.os }}-
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
