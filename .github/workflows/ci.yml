@@ -1,0 +1,25 @@
+name: laravel-passport-claims
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  run-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache Composer
+      uses: actions/cache@v2
+      with:
+        path: ~/.composer/cache
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+          ${{ runner.os }}-
+    - name: Install Dependencies
+      run: composer install --no-ansi --no-interaction --no-scripts --prefer-dist
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      run: vendor/bin/phpunit
