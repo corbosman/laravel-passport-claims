@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
+![laravel-passport-claims](https://github.com/corbosman/laravel-passport-claims/workflows/laravel-passport-claims/badge.svg?branch=master)
 
 This package allows you to add claims to Laravel Passport JWT Tokens. If you have questions or comments, please open an issue. 
 
@@ -112,6 +113,8 @@ Please see the [license file](license.md) for more information.
 [ico-version]: https://img.shields.io/packagist/v/corbosman/laravel-passport-claims.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/corbosman/laravel-passport-claims.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/12345678/shield
+
+[ico-build]: https://github.com/corbosman/laravel-passport-claims/workflows/laravel-passport-claims/badge.svg
 
 [link-packagist]: https://packagist.org/packages/corbosman/laravel-passport-claims
 [link-downloads]: https://packagist.org/packages/corbosman/laravel-passport-claims
