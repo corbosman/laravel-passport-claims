@@ -1,4 +1,4 @@
-name: laravel-passport-claims
+name: build
 
 on:
   push:
