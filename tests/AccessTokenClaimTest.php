@@ -10,9 +10,10 @@ use Orchestra\Testbench\TestCase;
 use League\OAuth2\Server\CryptKey;
 use Laravel\Passport\Bridge\Client;
 use Laravel\Passport\TokenRepository;
-use Laravel\Passport\Bridge\AccessToken;
 use Illuminate\Contracts\Events\Dispatcher;
+use CorBosman\Passport\Tests\Claims\MyClaim;
 use CorBosman\Passport\AccessTokenRepository;
+use CorBosman\Passport\Tests\Claims\AnotherClaim;
 
 class AccessTokenClaimTest extends TestCase
 {
@@ -24,9 +25,7 @@ class AccessTokenClaimTest extends TestCase
     public function test_can_add_claims_to_token()
     {
         /* set up the environment */
-        $tokenRepository = m::mock(TokenRepository::class);
-        $events = m::mock(Dispatcher::class);
-        $repository = new AccessTokenRepository($tokenRepository, $events);
+        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
         $client = new Client('client-id', 'name', 'redirect');
         $scopes = [];
         $userIdentifier = 1;
@@ -49,22 +48,3 @@ class AccessTokenClaimTest extends TestCase
     }
 }
 
-class MyClaim
-{
-    public function handle(AccessToken $token, $next)
-    {
-        $token->addClaim('my-claim', 'test');
-
-        return $next($token);
-    }
-}
-
-class AnotherClaim
-{
-    public function handle(AccessToken $token, $next)
-    {
-        $token->addClaim('another-claim', 'test');
-
-        return $next($token);
-    }
-}

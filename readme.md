@@ -15,6 +15,8 @@ Via Composer
 $ composer require corbosman/laravel-passport-claims
 ```
 
+## Usage
+
 This package sends the AccessToken class through a pipeline of classes to collect all the claims, similar to how laravel middleware works. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. You can of course add multiple claims in a single class as well. 
 
 You can use an artisan command to generate a class for you. Just provide a path from the root of your app folder. The example below will create a class app/Claims/CustomClaim.php
@@ -61,6 +63,7 @@ class CustomClaim
 }
 ```
 
+### config
 
 To tell this package which claims you want to add, you need to publish the config file and add a list of all your classes. To publish the config file, run the following command after installing this package. 
 
@@ -90,6 +93,26 @@ return [
     ]
 ];
 ```
+
+### middleware
+
+You can set a middleware on a route that checks for the existence of a specific claim. Add the middleware to your \App\Http\Kernel.php class:
+
+```php
+    protected $routeMiddleware = [
+        'claim' => \CorBosman\Passport\Http\Middleware\CheckForClaim::class,
+    ];
+```
+
+Then assign this middleware to a route. Generally you would also add a passport middleware that checks for a valid token. 
+
+```php
+Route::middleware(['client', 'claim:my-claim'])->get('my-protected-route', function () {
+    return 'protected by claim';
+});
+```
+
+
 
 ## Change log
 

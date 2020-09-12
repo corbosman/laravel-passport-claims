@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.6.0
+## Changed
+
+- Added a middleware that can check for the presence of a claim
+
 ## Version 1.5.0
 ## Changed
 
