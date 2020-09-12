@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.5.0
+## Changed
+
+- Added support for Laravel 8.x and Passport 10.x
+
 ## Version 1.4.0
 ## Changed
 
