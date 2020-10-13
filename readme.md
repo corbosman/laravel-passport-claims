@@ -56,7 +56,7 @@ class CustomClaim
     {
         $user = User::find($token->getUserIdentifier());
 
-        $token->addClaim('email', $user-email);
+        $token->addClaim('email', $user->email);
 
         return $next($token);
     }
