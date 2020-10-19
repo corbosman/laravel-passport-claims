@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.7.1
+## Changed
+
+- Added the option to check the value of a claim in the middleware
+
 ## Version 1.6.0
 ## Changed
 
