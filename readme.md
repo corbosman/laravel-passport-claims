@@ -9,11 +9,15 @@ This package allows you to add claims to Laravel Passport JWT Tokens. If you hav
 
 ## Installation
 
+There are 2 versions of this package, ^1 and ^2. You need to use ^2 if you use Passport 10.1.0 or higher. In that version Passport made significant changes to how the JWT is initiated. They did this because the upstream JWT library was causing errors in Passport installations. So first check which version of Passport you are using, then pick either ^1 or ^2. 
+
 Via Composer
 
 ``` bash
-$ composer require corbosman/laravel-passport-claims
+$ composer require corbosman/laravel-passport-claims ^2
 ```
+
+
 
 ## Usage
 

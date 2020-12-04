@@ -32,6 +32,7 @@ class CheckClaimMiddlewareTest extends TestCase
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
 
         /* set up request */
         $request = m::mock();
@@ -56,6 +57,7 @@ class CheckClaimMiddlewareTest extends TestCase
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
 
         /* set up request */
         $request = m::mock();
@@ -81,6 +83,7 @@ class CheckClaimMiddlewareTest extends TestCase
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
 
         /* set up request */
         $request = m::mock();
@@ -105,6 +108,7 @@ class CheckClaimMiddlewareTest extends TestCase
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
 
         /* set up request */
         $request = m::mock();

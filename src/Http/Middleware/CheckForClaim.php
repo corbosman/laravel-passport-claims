@@ -3,7 +3,7 @@
 namespace CorBosman\Passport\Http\Middleware;
 
 use Closure;
-use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Configuration;
 use Illuminate\Auth\AuthenticationException;
 
 class CheckForClaim
@@ -26,7 +26,7 @@ class CheckForClaim
 
         /* check if token parses properly */
         try {
-            $jwt = (new Parser())->parse($token);
+            $jwt = (Configuration::forUnsecuredSigner()->parser()->parse($token));
         } catch(\Exception $e) {
             throw new AuthenticationException;
         }
@@ -34,13 +34,13 @@ class CheckForClaim
         /* check if we want to check both claim and value */
         [$claim, $value] = explode(',', $claim . ',');
 
-        if ($jwt->hasClaim($claim)) {
+        if ($jwt->claims()->has($claim)) {
 
             if (!$value) {
                 return $next($request);
             }
 
-            if ($jwt->getClaim($claim) === $value) {
+            if ($jwt->claims()->get($claim) === $value) {
                 return $next($request);
             }
 
