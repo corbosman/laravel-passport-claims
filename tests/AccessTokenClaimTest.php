@@ -6,6 +6,7 @@ use Mockery as m;
 use Lcobucci\JWT\Parser;
 use phpseclib\Crypt\RSA;
 use Carbon\CarbonImmutable;
+use Lcobucci\JWT\Configuration;
 use Orchestra\Testbench\TestCase;
 use League\OAuth2\Server\CryptKey;
 use Laravel\Passport\Bridge\Client;
@@ -38,13 +39,14 @@ class AccessTokenClaimTest extends TestCase
         $token = $repository->getNewToken($client, $scopes, $userIdentifier);
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
 
         /* convert the token to a JWT and parse the JWT back to a Token */
-        $jwt = (new Parser())->parse($token->__toString());
+        $jwt = (Configuration::forUnsecuredSigner()->parser()->parse($token->__toString()));
 
         /* assert our claims were set on the token */
-        $this->assertEquals('test', $jwt->getClaim('my-claim'));
-        $this->assertEquals('test', $jwt->getClaim('another-claim'));
+        $this->assertEquals('test', $jwt->claims()->get('my-claim'));
+        $this->assertEquals('test', $jwt->claims()->get('another-claim'));
     }
 }
 
