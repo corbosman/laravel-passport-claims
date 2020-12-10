@@ -2,26 +2,38 @@
 
 namespace CorBosman\Passport;
 
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer\Key;
+use DateTimeImmutable;
+use Lcobucci\JWT\Token;
+use Lcobucci\JWT\Configuration;
 use Illuminate\Pipeline\Pipeline;
 use League\OAuth2\Server\CryptKey;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Lcobucci\JWT\Signer\Key\InMemory;
 use CorBosman\Passport\Traits\ClaimTrait;
+use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Laravel\Passport\Bridge\AccessToken as PassportAccessToken;
 
 class AccessToken extends PassportAccessToken
 {
     use ClaimTrait;
 
+    /**
+     * @var CryptKey
+     */
     private $privateKey;
+
+    /**
+     * @var Configuration
+     */
+    private $jwtConfiguration;
+
 
     /**
      * Generate a string representation from the access token
      */
     public function __toString()
     {
-        return (string) $this->convertToJWT($this->privateKey);
+        return $this->convertToJWT()->toString();
     }
 
     /**
@@ -34,20 +46,33 @@ class AccessToken extends PassportAccessToken
     }
 
     /**
-     * override the JWT so we can add our own claims
-     *
-     * @param CryptKey $privateKey
-     * @return \Lcobucci\JWT\Token
+     * Initialise the JWT Configuration.
      */
-    public function convertToJWT(CryptKey $privateKey)
+    public function initJwtConfiguration()
     {
-        $jwt = (new Builder())
+        $this->jwtConfiguration = Configuration::forAsymmetricSigner(
+            new Sha256(),
+            LocalFileReference::file($this->privateKey->getKeyPath(), $this->privateKey->getPassPhrase() ?? ''),
+            InMemory::plainText('')
+        );
+    }
+
+    /**
+     * Generate a JWT from the access token
+     *
+     * @return Token
+     */
+    private function convertToJWT()
+    {
+        $this->initJwtConfiguration();
+
+        $jwt = $this->jwtConfiguration->builder()
             ->permittedFor($this->getClient()->getIdentifier())
-            ->identifiedBy($this->getIdentifier(), true)
-            ->issuedAt(time())
-            ->canOnlyBeUsedAfter(time())
-            ->expiresAt($this->getExpiryDateTime()->getTimestamp())
-            ->relatedTo($this->getUserIdentifier())
+            ->identifiedBy($this->getIdentifier())
+            ->issuedAt(new DateTimeImmutable())
+            ->canOnlyBeUsedAfter(new DateTimeImmutable())
+            ->expiresAt($this->getExpiryDateTime())
+            ->relatedTo((string) $this->getUserIdentifier())
             ->withClaim('scopes', $this->getScopes());
 
         collect(app(Pipeline::class)
@@ -59,6 +84,6 @@ class AccessToken extends PassportAccessToken
                 $jwt->withClaim($key, $value);
             });
 
-        return $jwt->getToken(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()));
+        return $jwt->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
     }
 }
