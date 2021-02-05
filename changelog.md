@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 2.0.1
+## Changed
+
+- PR from vigneshgurusamy to remove duplicate code.
+
 ## Version 2.0.0
 ## Changed
 
