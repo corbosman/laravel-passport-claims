@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 3.0.0
+## Changed
+
+- Added support for custom claim formatters.
+
 ## Version 2.0.1
 ## Changed
 
