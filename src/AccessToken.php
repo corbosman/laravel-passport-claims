@@ -21,7 +21,7 @@ class AccessToken extends PassportAccessToken
     {
         $this->initJwtConfiguration();
 
-        $jwt = $this->jwtConfiguration->builder()
+        $jwt = $this->jwtConfiguration->builder(ClaimsFormatter::formatters())
             ->permittedFor($this->getClient()->getIdentifier())
             ->identifiedBy($this->getIdentifier())
             ->issuedAt(new DateTimeImmutable())
