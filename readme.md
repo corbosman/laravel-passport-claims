@@ -124,6 +124,19 @@ You can also check if the claim matches a specific value.
  });
  ```
 
+### Formatters
+
+This package also allows you to configure custom Formatters. Formatters can be used to modify existing claims. You could even use them to add claims. A common reason to opt for a custom Formatter is to change the DateTime fields in the JWT from floats back to integers. Due to a change in a library, JWTs are now issued with float values, which breaks compatibility with virtually all other JWT libraries. If you run into that problem, all you have to do is add the following to the passport-claims.php config file:
+
+```php
+   'formatters' => [
+        \Lcobucci\JWT\Encoding\UnifyAudience::class,
+        \Lcobucci\JWT\Encoding\UnixTimestampDates::class,
+    ]
+```
+
+This swaps out the microsecond formatter with the old unix timestamp formatter. You're of course also free to add any other custom claim formatters. 
+
 
 ## Change log
 
