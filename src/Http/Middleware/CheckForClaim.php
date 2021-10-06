@@ -17,7 +17,7 @@ class CheckForClaim
      * @return mixed
      * @throws AuthenticationException
      */
-    public function handle($request, Closure $next, $claim)
+    public function handle($request, Closure $next, $claim, $value = null)
     {
         /* check for presence of token */
         if ( ! ($token = $request->bearerToken())) {
@@ -32,8 +32,6 @@ class CheckForClaim
         }
 
         /* check if we want to check both claim and value */
-        [$claim, $value] = explode(',', $claim . ',');
-
         if ($jwt->claims()->has($claim)) {
 
             if (!$value) {

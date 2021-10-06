@@ -67,7 +67,7 @@ class CheckClaimMiddlewareTest extends TestCase
 
         $response = $middleware->handle($request, function () {
             return 'response';
-        }, 'my-claim,test');
+        }, 'my-claim', 'test');
 
         $this->assertSame('response', $response);
     }
@@ -118,7 +118,7 @@ class CheckClaimMiddlewareTest extends TestCase
 
         $response = $middleware->handle($request, function () {
             return 'response';
-        }, 'my-claim,foo');
+        }, 'my-claim', 'foo');
     }
 
     public function test_exception_is_thrown_if_request_doesnt_have_token()
