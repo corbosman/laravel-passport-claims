@@ -34,7 +34,7 @@ class CheckForClaim
         /* check if we want to check both claim and value */
         if ($jwt->claims()->has($claim)) {
 
-            if (!$value) {
+            if ($value === null) {
                 return $next($request);
             }
 
