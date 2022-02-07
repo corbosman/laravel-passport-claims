@@ -12,6 +12,6 @@ return [
     |
     */
     'claims' => [
-        // App\Claims\MyCustomClaim::class
+        // App\Claims\CustomClaim::class
     ]
 ];
