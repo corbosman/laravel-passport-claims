@@ -37,6 +37,7 @@
             "CorBosman\\Passport\\Tests\\": "tests"
         }
     },
+    "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
