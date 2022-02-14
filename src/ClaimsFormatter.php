@@ -10,7 +10,9 @@ class ClaimsFormatter
 {
     public static function formatters(): ChainedFormatter
     {
-        $formatters = array_map(fn ($formatter) => new $formatter, config('passport-claims.formatters', []));
+        $formatters = array_map(function ($formatter) {
+            return new $formatter;
+        }, config('passport-claims.formatters', []));
 
         return count($formatters) > 0 ? new ChainedFormatter(...$formatters) : ChainedFormatter::default();
     }
