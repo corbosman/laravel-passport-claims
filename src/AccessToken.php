@@ -4,6 +4,7 @@ namespace CorBosman\Passport;
 
 use DateTimeImmutable;
 use Illuminate\Pipeline\Pipeline;
+use Lcobucci\JWT\Token;
 use CorBosman\Passport\Traits\ClaimTrait;
 use League\OAuth2\Server\Entities\Traits\AccessTokenTrait;
 use Laravel\Passport\Bridge\AccessToken as PassportAccessToken;
