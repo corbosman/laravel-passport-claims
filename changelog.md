@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 4.0.0
+## Changed
+
+- Support for Laravel 9
+
 ## Version 3.0.0
 ## Changed
 
