@@ -27,7 +27,7 @@ class CheckClaimMiddlewareTest extends TestCase
         /* set up token with custom claim */
         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
         $client = new Client('client-id', 'name', 'redirect');
-        $keys = (new RSA())->createKey(1024);
+        $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
@@ -52,7 +52,7 @@ class CheckClaimMiddlewareTest extends TestCase
         /* set up token with custom claim */
         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
         $client = new Client('client-id', 'name', 'redirect');
-        $keys = (new RSA())->createKey(1024);
+        $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
@@ -79,7 +79,7 @@ class CheckClaimMiddlewareTest extends TestCase
         /* set up token without any custom claims */
         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
         $client = new Client('client-id', 'name', 'redirect');
-        $keys = (new RSA())->createKey(1024);
+        $keys = (new RSA())->createKey(2048);
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
         $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
@@ -103,7 +103,7 @@ class CheckClaimMiddlewareTest extends TestCase
         /* set up token with custom claim */
         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
         $client = new Client('client-id', 'name', 'redirect');
-        $keys = (new RSA())->createKey(1024);
+        $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));

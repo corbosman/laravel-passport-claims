@@ -30,7 +30,7 @@ class AccessTokenClaimTest extends TestCase
         $client = new Client('client-id', 'name', 'redirect');
         $scopes = [];
         $userIdentifier = 1;
-        $keys = (new RSA())->createKey(1024);
+        $keys = (new RSA())->createKey(2048);
 
         /* set custom claims, defined below this test */
         app('config')->set('passport-claims.claims', [MyClaim::class, AnotherClaim::class]);
