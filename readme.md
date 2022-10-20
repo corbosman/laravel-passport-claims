@@ -17,7 +17,7 @@ Laravel 8
 $ composer require corbosman/laravel-passport-claims ^3
 ```
 
-Laravel 9
+Laravel 9+
 
 ``` bash
 $ composer require corbosman/laravel-passport-claims ^4
