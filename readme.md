@@ -37,12 +37,12 @@ $ php artisan claim:generate Claims/CustomClaim
 
 ```php
 <?php
-
 namespace App\Claims;
+use CorBosman\Passport\AccessToken;  // extends Laravel\Passport\Bridge\AccessToken
 
 class CustomClaim
 {
-    public function handle($token, $next)
+    public function handle(AccessToken $token, $next)
     {
         $token->addClaim('my-claim', 'my custom claim data');
 
@@ -59,10 +59,11 @@ Because the Passport AccessToken is sent through the pipeline, you have access t
 namespace App\Claims;
 
 use App\User;
+use CorBosman\Passport\AccessToken; // extends Laravel\Passport\Bridge\AccessToken
 
 class CustomClaim
 {
-    public function handle($token, $next)
+    public function handle(AccessToken $token, $next)
     {
         $user = User::find($token->getUserIdentifier());
 
