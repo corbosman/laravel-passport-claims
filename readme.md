@@ -17,8 +17,6 @@ Via Composer
 composer require corbosman/laravel-passport-claims
 ```
 
-Earlier versions of Laravel/Passport are no longer supported.
-
 ## Usage
 
 This package sends the AccessToken class through a pipeline of classes to collect all the claims, similar to how laravel middleware works. Each class adds a claim to the token. For each claim that you want to add, you need to create a class like the example below. You can of course add multiple claims in a single class as well. 
