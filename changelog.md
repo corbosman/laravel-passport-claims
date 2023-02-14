@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 5.x
+## Changed
+
+- Support for Laravel 10
+
 ## Version 4.0.0
 ## Changed
 

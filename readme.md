@@ -9,18 +9,12 @@ This package allows you to add claims to Laravel Passport JWT Tokens. If you hav
 
 ## Installation
 
+This package only supports Laravel 9 and 10. You can try to use older versions of this package but it's not supported. 
+
 Via Composer
 
-Laravel 8 
-
 ``` bash
-$ composer require corbosman/laravel-passport-claims ^3
-```
-
-Laravel 9+
-
-``` bash
-$ composer require corbosman/laravel-passport-claims ^4
+composer require corbosman/laravel-passport-claims
 ```
 
 Earlier versions of Laravel/Passport are no longer supported.
@@ -32,7 +26,7 @@ This package sends the AccessToken class through a pipeline of classes to collec
 You can use an artisan command to generate a class for you. Just provide a path from the root of your app folder. The example below will create a class app/Claims/CustomClaim.php
 
 ```bash
-$ php artisan claim:generate Claims/CustomClaim
+php artisan claim:generate Claims/CustomClaim
 ```
 
 ```php
