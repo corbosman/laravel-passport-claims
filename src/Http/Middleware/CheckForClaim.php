@@ -26,7 +26,7 @@ class CheckForClaim
 
         /* check if token parses properly */
         try {
-            $jwt = (Configuration::forUnsecuredSigner()->parser()->parse($token));
+            $jwt = ((new Parser(new JoseEncoder))->parse($token));
         } catch(\Exception $e) {
             throw new AuthenticationException;
         }
