@@ -1,9 +1,7 @@
 # Release Notes
 
-## Version 5.x
-## Changed
-
 - Support for Laravel 10
+- Support Passport 11.x, which uses the latest version of lcobucci/jwt 5.x
 
 ## Version 4.0.0
 ## Changed
