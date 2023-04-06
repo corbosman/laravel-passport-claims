@@ -2,11 +2,11 @@
 
 namespace CorBosman\Passport\Tests;
 
+use Lcobucci\JWT\Encoding\JoseEncoder;
 use Mockery as m;
-use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Token\Parser;
 use phpseclib\Crypt\RSA;
 use Carbon\CarbonImmutable;
-use Lcobucci\JWT\Configuration;
 use Orchestra\Testbench\TestCase;
 use League\OAuth2\Server\CryptKey;
 use Laravel\Passport\Bridge\Client;
@@ -42,7 +42,7 @@ class AccessTokenClaimTest extends TestCase
         $token->setIdentifier('test');
 
         /* convert the token to a JWT and parse the JWT back to a Token */
-        $jwt = (Configuration::forUnsecuredSigner()->parser()->parse($token->__toString()));
+        $jwt = (new Parser(new JoseEncoder))->parse($token->__toString());
 
         /* assert our claims were set on the token */
         $this->assertEquals('test', $jwt->claims()->get('my-claim'));

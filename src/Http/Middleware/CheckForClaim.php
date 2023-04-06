@@ -3,8 +3,9 @@
 namespace CorBosman\Passport\Http\Middleware;
 
 use Closure;
-use Lcobucci\JWT\Configuration;
 use Illuminate\Auth\AuthenticationException;
+use Lcobucci\JWT\Encoding\JoseEncoder;
+use Lcobucci\JWT\Token\Parser;
 
 class CheckForClaim
 {
@@ -26,7 +27,7 @@ class CheckForClaim
 
         /* check if token parses properly */
         try {
-            $jwt = (Configuration::forUnsecuredSigner()->parser()->parse($token));
+            $jwt = ((new Parser(new JoseEncoder))->parse($token));
         } catch(\Exception $e) {
             throw new AuthenticationException;
         }

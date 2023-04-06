@@ -18,7 +18,7 @@ class AccessToken extends PassportAccessToken
      *
      * @return Token
      */
-    private function convertToJWT()
+    private function convertToJWT() : Token
     {
         $this->initJwtConfiguration();
 
@@ -31,15 +31,12 @@ class AccessToken extends PassportAccessToken
             ->relatedTo((string) $this->getUserIdentifier())
             ->withClaim('scopes', $this->getScopes());
 
-        collect(app(Pipeline::class)
+        return collect(app(Pipeline::class)
             ->send($this)
             ->through(config('passport-claims.claims', []))
             ->thenReturn()
             ->claims())
-            ->each(function($value, $key) use ($jwt) {
-                $jwt->withClaim($key, $value);
-            });
-
-        return $jwt->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
+            ->reduce(fn($jwt, $value, $key) => $jwt->withClaim($key, $value), $jwt)
+            ->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
     }
 }
