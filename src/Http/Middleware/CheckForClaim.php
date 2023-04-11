@@ -9,6 +9,38 @@ use Lcobucci\JWT\Token\Parser;
 
 class CheckForClaim
 {
+    /** @var \Lcobucci\JWT\Token|null */
+    private static $jwt;
+
+    public static function setToken(Token $jwt = null): void
+    {
+        static::$jwt = $jwt;
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     */
+    public static function getToken($request = null)
+    {
+        if (static::$jwt) {
+            return static::$jwt;
+        }
+
+        /* check for presence of token */
+        if ( ! ($token = ($request ?: request())?->bearerToken())) {
+            return null;
+        }
+
+        /* check if token parses properly */
+        try {
+            static::$jwt = ((new Parser(new JoseEncoder))->parse($token));
+        } catch(\Exception $e) {
+            return null;
+        }
+
+        return static::$jwt;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -20,15 +52,9 @@ class CheckForClaim
      */
     public function handle($request, Closure $next, $claim, $value = null)
     {
-        /* check for presence of token */
-        if ( ! ($token = $request->bearerToken())) {
-            throw new AuthenticationException;
-        }
+        $jwt = static::getToken($request);
 
-        /* check if token parses properly */
-        try {
-            $jwt = ((new Parser(new JoseEncoder))->parse($token));
-        } catch(\Exception $e) {
+        if ( ! $jwt) {
             throw new AuthenticationException;
         }
 
