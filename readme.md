@@ -115,11 +115,19 @@ Route::middleware(['client', 'claim:my-claim'])->get('my-protected-route', funct
 });
 ```
 
-You can also check if the claim matches a specific value.
+You can check if the claim matches a specific value.
 
  ```php
  Route::middleware(['client', 'claim:my-claim,foobar'])->get('my-protected-route', function () {
      return 'protected by claim with foobar as its value';
+ });
+ ```
+ 
+You can also check if the claim matches a specific value from multiple values, you just need to add the values ​​separated with `|`.
+
+ ```php
+ Route::middleware(['client', 'claim:my-claim,foo|bar'])->get('my-protected-route', function () {
+     return 'protected by claim with foo or bar as its value';
  });
  ```
 

@@ -39,7 +39,7 @@ class CheckForClaim
                 return $next($request);
             }
 
-            if ($jwt->claims()->get($claim) === $value) {
+            if (in_array($jwt->claims()->get($claim), explode('|', (string) $value))) {
                 return $next($request);
             }
 
