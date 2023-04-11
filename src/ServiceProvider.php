@@ -2,6 +2,7 @@
 
 namespace CorBosman\Passport;
 
+use Laravel\Passport\Bridge\AccessTokenRepository as PassportAccessTokenRepository;
 use CorBosman\Passport\Console\ClaimGenerator;
 use Laravel\Passport\Passport;
 
@@ -10,7 +11,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function boot()
     {
-        Passport::useAccessTokenEntity(AccessToken::class);
+        $this->app->bind(PassportAccessTokenRepository::class, AccessTokenRepository::class);
 
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
