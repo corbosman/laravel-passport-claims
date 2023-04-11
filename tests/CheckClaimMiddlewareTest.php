@@ -72,6 +72,31 @@ class CheckClaimMiddlewareTest extends TestCase
         $this->assertSame('response', $response);
     }
 
+    public function test_request_is_passed_along_if_claim_matches_a_value_from_many()
+    {
+        /* set up token with custom claim */
+        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', 'redirect');
+        $keys = (new RSA())->createKey(2048);
+        app('config')->set('passport-claims.claims', [MyClaim::class]);
+        $token = $repository->getNewToken($client, [], '');
+        $token->setPrivateKey(new CryptKey($keys['privatekey']));
+        $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
+
+        /* set up request */
+        $request = m::mock();
+        $request->shouldReceive('bearerToken')->andReturn($token->__toString());
+
+        $middleware = new CheckForClaim;
+
+        $response = $middleware->handle($request, function () {
+            return 'response';
+        }, 'my-claim', 'test|test2');
+
+        $this->assertSame('response', $response);
+    }
+
     public function test_exception_is_thrown_if_token_doesnt_have_claim()
     {
         $this->expectException(AuthenticationException::class);
