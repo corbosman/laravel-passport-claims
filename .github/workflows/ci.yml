@@ -8,18 +8,31 @@ jobs:
   run-tests:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [8.2, 8.1, 8.0]
+        laravel: [10.*, 9.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+        exclude:
+          - laravel: 10.*
+            php: 8.0
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Cache Composer
-      uses: actions/cache@v2
-      with:
-        path: ~/.composer/cache
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
-          ${{ runner.os }}-
-    - name: Install Dependencies
-      run: composer install --no-ansi --no-interaction --no-scripts --prefer-dist
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: vendor/bin/phpunit
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}          
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          composer require "illuminate/support:${{ matrix.laravel }}" "nesbot/carbon:^2.62.1" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: vendor/bin/phpunit
