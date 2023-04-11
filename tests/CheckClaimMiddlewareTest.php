@@ -19,6 +19,7 @@ class CheckClaimMiddlewareTest extends TestCase
 {
     protected function tearDown(): void
     {
+        CheckForClaim::setToken();
         m::close();
     }
 
