@@ -13,5 +13,17 @@ return [
     */
     'claims' => [
         // App\Claims\CustomClaim::class
-    ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | JWT Custom Builder
+    |--------------------------------------------------------------------------
+    |
+    | Here you can change which class implements the convertToJWT method.
+    | The class requires method convertToJWT() : Token to return a custom
+    | token builder for the pipeline. It must be a private function.
+    |
+    */
+    'builder' => \CorBosman\Passport\AccessToken::class
 ];
