@@ -31,6 +31,10 @@ class AccessToken extends PassportAccessToken
             ->relatedTo((string) $this->getUserIdentifier())
             ->withClaim('scopes', $this->getScopes());
 
+        if (config('passport-claims.issuer_enabled') && config('passport-claims.issuer')) {
+            $jwt = $jwt->issuedBy(config('passport-claims.issuer'));
+        }
+
         return collect(app(Pipeline::class)
             ->send($this)
             ->through(config('passport-claims.claims', []))
