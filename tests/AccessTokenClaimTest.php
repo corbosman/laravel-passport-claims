@@ -81,7 +81,6 @@ class AccessTokenClaimTest extends TestCase
          $keys = (new RSA())->createKey(2048);
 
         /* set custom claims, defined below this test */
-        app('config')->set('passport-claims.issuer_enabled', true);
         app('config')->set('passport-claims.issuer', 'https://example.com');
 
         /* create the laravel token */

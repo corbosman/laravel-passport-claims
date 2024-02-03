@@ -31,7 +31,7 @@ class AccessToken extends PassportAccessToken
             ->relatedTo((string) $this->getUserIdentifier())
             ->withClaim('scopes', $this->getScopes());
 
-        if (config('passport-claims.issuer_enabled') && config('passport-claims.issuer')) {
+        if (config('passport-claims.issuer')) {
             $jwt = $jwt->issuedBy(config('passport-claims.issuer'));
         }
 

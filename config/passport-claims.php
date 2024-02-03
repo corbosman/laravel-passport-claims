@@ -20,10 +20,9 @@ return [
     | Issue Claim
     |--------------------------------------------------------------------------
     |
-    | Here you config the issue claim, weather to add it or not and what is the issuer.
+    | Here you config the issue claim. if null will not be set
     | NOTE: it will set the `iss` claim ref: https://www.rfc-editor.org/rfc/rfc7519#section-4.1.1
     |
     */
-    'issuer_enabled' => env('JWT_ISSUER_ENABLED', false),
-    'issuer' => env('JWT_ISSUER'),
+    'issuer' => env('JWT_ISSUER', null),
 ];
