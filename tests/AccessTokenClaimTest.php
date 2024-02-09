@@ -48,5 +48,52 @@ class AccessTokenClaimTest extends TestCase
         $this->assertEquals('test', $jwt->claims()->get('my-claim'));
         $this->assertEquals('test', $jwt->claims()->get('another-claim'));
     }
+
+    public function test_jwt_dose_not_include_iss_claim_by_default()
+    {
+         /* set up the environment */
+         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
+         $client = new Client('client-id', 'name', 'redirect');
+         $scopes = [];
+         $userIdentifier = 1;
+         $keys = (new RSA())->createKey(2048);
+
+        /* create the laravel token */
+        $token = $repository->getNewToken($client, $scopes, $userIdentifier);
+        $token->setPrivateKey(new CryptKey($keys['privatekey']));
+        $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
+
+        /* convert the token to a JWT and parse the JWT back to a Token */
+        $jwt = (new Parser(new JoseEncoder))->parse($token->__toString());
+
+        /* assert our claims were set on the token */
+        $this->assertEquals(null, $jwt->claims()->get('iss'));
+    }
+
+    public function test_jwt_has_iss_claim_when_configured()
+    {
+         /* set up the environment */
+         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
+         $client = new Client('client-id', 'name', 'redirect');
+         $scopes = [];
+         $userIdentifier = 1;
+         $keys = (new RSA())->createKey(2048);
+
+        /* set custom claims, defined below this test */
+        app('config')->set('passport-claims.issuer', 'https://example.com');
+
+        /* create the laravel token */
+        $token = $repository->getNewToken($client, $scopes, $userIdentifier);
+        $token->setPrivateKey(new CryptKey($keys['privatekey']));
+        $token->setExpiryDateTime(CarbonImmutable::now()->addHour());
+        $token->setIdentifier('test');
+
+        /* convert the token to a JWT and parse the JWT back to a Token */
+        $jwt = (new Parser(new JoseEncoder))->parse($token->__toString());
+
+        /* assert our claims were set on the token */
+        $this->assertEquals('https://example.com', $jwt->claims()->get('iss'));
+    }
 }
 

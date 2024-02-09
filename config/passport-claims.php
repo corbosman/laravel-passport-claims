@@ -13,5 +13,16 @@ return [
     */
     'claims' => [
         // App\Claims\CustomClaim::class
-    ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Issue Claim
+    |--------------------------------------------------------------------------
+    |
+    | Here you config the issue claim. if null will not be set
+    | NOTE: it will set the `iss` claim ref: https://www.rfc-editor.org/rfc/rfc7519#section-4.1.1
+    |
+    */
+    'issuer' => env('JWT_ISSUER', null),
 ];
