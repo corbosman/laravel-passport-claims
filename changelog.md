@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 5.3.0
+## Changed
+
+- Allow setting issuedby (PR by @abublihi)
+
 ## version 5.0.0
 ## Changed
 
