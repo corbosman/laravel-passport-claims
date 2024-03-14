@@ -18,7 +18,7 @@
     ],
     "require": {
         "illuminate/support": "^9.0|^10.0|^11.0",
-        "laravel/passport": "^10.3|^11.2|dev-master"
+        "laravel/passport": "^10.3|^11.2|^12"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.10|^10.5",
