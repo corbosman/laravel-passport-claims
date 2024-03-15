@@ -21,7 +21,7 @@
         "laravel/passport": "^10.3|^11.2|^12.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^9.5.1|^10.5",
         "mockery/mockery": "^1.4",
         "orchestra/testbench": "^7.0|^8.0|^9.0",
         "phpseclib/phpseclib": "^3.0",
