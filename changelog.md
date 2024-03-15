@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 6.0.0
+## Changed
+
+- Support for Laravel 11
+
 ## Version 5.3.0
 ## Changed
 
