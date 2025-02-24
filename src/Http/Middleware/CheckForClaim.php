@@ -12,7 +12,7 @@ class CheckForClaim
     /** @var \Lcobucci\JWT\Token|null */
     private static $jwt;
 
-    public static function setToken(Token $jwt = null): void
+    public static function setToken(?Token $jwt = null): void
     {
         static::$jwt = $jwt;
     }

@@ -21,6 +21,9 @@ class AccessTokenClaimTest extends TestCase
     protected function tearDown(): void
     {
         m::close();
+
+        restore_error_handler();
+        restore_exception_handler();
     }
 
     public function test_can_add_claims_to_token()

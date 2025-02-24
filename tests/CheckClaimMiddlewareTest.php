@@ -21,6 +21,9 @@ class CheckClaimMiddlewareTest extends TestCase
     {
         CheckForClaim::setToken();
         m::close();
+
+        restore_error_handler();
+        restore_exception_handler();
     }
 
     public function test_request_is_passed_along_if_claim_is_present_on_token()

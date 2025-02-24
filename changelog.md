@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 7.0.0
+## Changed
+
+- Support for Laravel 12
+- Dropped support for Laravel 9 and 10, and php 8.0, 8.1
 ## Version 6.0.0
 ## Changed
 
