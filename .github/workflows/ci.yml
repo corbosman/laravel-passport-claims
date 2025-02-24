@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          composer require "illuminate/support:${{ matrix.laravel }}" "nesbot/carbon:^2.62.1" --no-interaction --no-update
+          composer require "illuminate/support:${{ matrix.laravel }}" "nesbot/carbon:^3" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
