@@ -9,7 +9,7 @@ This package allows you to add claims to Laravel Passport JWT Tokens. If you hav
 
 ## Installation
 
-This package only supports Laravel 9 and 10. You can try to use older versions of this package but it's not supported. 
+This package only supports Laravel 11 and 12. You can try to use older versions of this package but it's not supported. 
 
 Via Composer
 
