@@ -18,7 +18,7 @@
     ],
     "require": {
         "illuminate/support": "^11.0|^12.0",
-        "laravel/passport": "^11.2|^12.0",
+        "laravel/passport": "^11.2|^12.0|^13.0",
         "nesbot/carbon": "^3"
     },
     "require-dev": {
@@ -49,7 +49,8 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     }
 }

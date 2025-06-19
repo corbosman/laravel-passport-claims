@@ -29,8 +29,8 @@ class CheckClaimMiddlewareTest extends TestCase
     public function test_request_is_passed_along_if_claim_is_present_on_token()
     {
         /* set up token with custom claim */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
@@ -54,8 +54,8 @@ class CheckClaimMiddlewareTest extends TestCase
     public function test_request_is_passed_along_if_claim_matches_a_value()
     {
         /* set up token with custom claim */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
@@ -79,8 +79,8 @@ class CheckClaimMiddlewareTest extends TestCase
     public function test_request_is_passed_along_if_claim_matches_a_value_from_many()
     {
         /* set up token with custom claim */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');
@@ -106,8 +106,8 @@ class CheckClaimMiddlewareTest extends TestCase
         $this->expectException(AuthenticationException::class);
 
         /* set up token without any custom claims */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $keys = (new RSA())->createKey(2048);
         $token = $repository->getNewToken($client, [], '');
         $token->setPrivateKey(new CryptKey($keys['privatekey']));
@@ -130,8 +130,8 @@ class CheckClaimMiddlewareTest extends TestCase
         $this->expectException(AuthenticationException::class);
 
         /* set up token with custom claim */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $keys = (new RSA())->createKey(2048);
         app('config')->set('passport-claims.claims', [MyClaim::class]);
         $token = $repository->getNewToken($client, [], '');

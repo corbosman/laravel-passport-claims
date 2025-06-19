@@ -29,8 +29,8 @@ class AccessTokenClaimTest extends TestCase
     public function test_can_add_claims_to_token()
     {
         /* set up the environment */
-        $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-        $client = new Client('client-id', 'name', 'redirect');
+        $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+        $client = new Client('client-id', 'name', ['redirect']);
         $scopes = [];
         $userIdentifier = 1;
         $keys = (new RSA())->createKey(2048);
@@ -55,8 +55,8 @@ class AccessTokenClaimTest extends TestCase
     public function test_jwt_dose_not_include_iss_claim_by_default()
     {
          /* set up the environment */
-         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-         $client = new Client('client-id', 'name', 'redirect');
+         $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+         $client = new Client('client-id', 'name', ['redirect']);
          $scopes = [];
          $userIdentifier = 1;
          $keys = (new RSA())->createKey(2048);
@@ -77,8 +77,8 @@ class AccessTokenClaimTest extends TestCase
     public function test_jwt_has_iss_claim_when_configured()
     {
          /* set up the environment */
-         $repository = new AccessTokenRepository(m::mock(TokenRepository::class), m::mock(Dispatcher::class));
-         $client = new Client('client-id', 'name', 'redirect');
+         $repository = new AccessTokenRepository(m::mock(Dispatcher::class));
+         $client = new Client('client-id', 'name', ['redirect']);
          $scopes = [];
          $userIdentifier = 1;
          $keys = (new RSA())->createKey(2048);

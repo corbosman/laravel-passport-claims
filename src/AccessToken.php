@@ -43,4 +43,9 @@ class AccessToken extends PassportAccessToken
             ->reduce(fn($jwt, $value, $key) => $jwt->withClaim($key, $value), $jwt)
             ->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
     }
+
+    public function __toString()
+    {
+        return $this->convertToJWT()->toString();
+    }
 }
