@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 8.0.0
+## Changed
+
+- Support for Passport v13
+
 ## Version 7.0.0
 ## Changed
 
@@ -39,7 +44,7 @@
 ## Version 2.0.0
 ## Changed
 
-- Compatibility with Passport 10.1. Note that you should only move to the 2.x versions if you run Passport 10.1 or higher. 
+- Compatibility with Passport 10.1. Note that you should only move to the 2.x versions if you run Passport 10.1 or higher.
 
 ## Version 1.7.1
 ## Changed
