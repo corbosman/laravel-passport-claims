@@ -6,12 +6,12 @@ on:
 
 jobs:
   run-tests:
-
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         php: [8.5, 8.4, 8.3]
-        laravel: ['12.*']
+        laravel: ['12.*', '13.*']
         dependency-version: [prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
