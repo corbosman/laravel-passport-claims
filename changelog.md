@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 9.0.0
+## Changed
+
+- Support for Laravel 13
+- Dropped support for Laravel 11 and php 8.2
+
 ## Version 8.0.0
 ## Changed
 
